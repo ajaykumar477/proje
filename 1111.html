@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find account</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        #header,
+        #footer {
+            height: 10vh;
+            background-color: white;
+        }
+
+        #contant {
+            height: 80vh;
+            background-color: rgba(240, 244, 248, 0.857)
+        }
+
+        #contant-main {
+            height: 60%;
+            width: 40%;
+            background-color: white;
+            position: relative;
+            top: 20%;
+            border-radius: 8px;
+        }
+
+        #contant-main:hover {
+            box-shadow: 1px 1px 4px 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fullbody">
+
+        <div class="col-sm-12  navbar nav" id="header">
+            <h1 style="font-size: 40px;color: blue;position: relative;top: -5px;"><b>facebook</b></h1><br>
+            <div class="col-sm-7">
+                <input type="text" id="txtuser" placeholder="Email or phone ">
+                <input type="password" id="txtpassword" placeholder="Password ">
+                <button style="background-color: blue;color: white;font-size: 16px; border-radius: 5px;"
+                    onclick="logbtn()">Log in</button>
+                <span><a href="#"> Forgotten account?</a></span>
+            </div>
+        </div>
+        <div id="contant">
+            <div id="contant-main" class="container">
+                <span style="font-size: 25px;"><b> <pre>   Find Your Account</pre></b></span>
+                <hr>
+                <p>Please enter your email address or mobile number to search for your account.</p>
+                <input type="text" class="form-control" id="txtuser1" placeholder="Email address or Mobile number">
+                <hr>
+                <span>
+                    <button style="background-color: gray; color: white;" onclick="document.location='index.html'">Cancel</button>
+                    <button style="background-color: blue; color: white;" onclick="searchAccount()">Search</button>
+                </span>
+                <div id="confirmation" style="display: none;">
+                    <hr>
+                    <h4>Account Found!</h4>
+                    <p id="matchedAccount"></p>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <script>
+        function searchAccount() {
+            var searchValue = document.getElementById("txtuser1").value;
+            var storedData = JSON.parse(localStorage.getItem("signupuser"));
+
+            if (storedData) {
+                var matchedAccount = null;
+
+                for (var i = 0; i < storedData.length; i++) {
+                    if (storedData[i].usermobile=== searchValue || storedData[i].mobile === searchValue) {
+                        matchedAccount = storedData[i];
+                        break;
+                    }
+                }
+
+                if (matchedAccount) {
+                    var confirmationDiv = document.getElementById("confirmation");
+                    var matchedAccountInfo = "Name: " + matchedAccount.username + "<br>";
+                    matchedAccountInfo += "Password: " + matchedAccount.password + "<br>";
+                    matchedAccountInfo += "Mobile: " + matchedAccount.usermobile + "<br>";
+                    document.getElementById("matchedAccount").innerHTML = matchedAccountInfo;
+                    confirmationDiv.style.display = "block";
+                } else {
+                    alert("No account found.");
+                }
+            } else {
+                alert("No stored signup data found. Please sign up first.");
+            }
+        }
+    </script>
+</body>
+
+</html>

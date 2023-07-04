@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        #fblogo {
+            height: 550px;
+            width: 33%;
+            /* position: absolute;
+            bottom: 150px;
+            left: 34%; */
+            border-radius: 15px;
+            box-shadow: 1px 1px 5px 5px gray;
+
+            background-color: white;
+
+        }
+
+        body {
+            overflow: scroll;
+            background-color: rgb(246, 246, 252);
+        }
+
+        .form-control {
+            height: 50px;
+            margin-bottom: -15px;
+        }
+    </style>
+</head>
+
+<body>
+    <CENTER>
+        <h1 style="font-size: 50px;color: blue;position: relative;top: 25px;"><b>facebook</b></h1><br>
+        <div id="fblogo" class=" form-control col-sm-12 col-md-12">
+            <span><b>create a new account</b></span><br>
+            <span>it is quick and easy</span><br><br>
+            <span>
+                <input type="text" id="txtname" style="width: 182px;border-radius: 1px;" placeholder="First Name">
+
+                <input type="text" id="txtlastname" style="width: 182px;border-radius: 1px; margin-bottom:10px ;"
+                    placeholder="Surname">
+
+                <input type="text" id="txtmobile" style="height: 29px;" class="form-control"
+                    placeholder="Mobile No or Email address"><br>
+
+                <input type="text" id="txtpass" style="height: 29px;" class="form-control" placeholder="Password"><br>
+
+                <span style="right: 140px;position: relative;">date of birth*</span><br>
+                <!-- <label for="date">Date</label> -->
+
+                <span id="dob">
+                    <input type="number" min="1" max="31" placeholder="Date">
+                    <select name="" id="">
+                        <option value="">Janurary</option>
+                        <option value="">Feb</option>
+                        <option value="">March</option>
+                        <option value="">April</option>
+                        <option value="">May</option>
+                        <option value="">June</option>
+                        <option value="">July</option>
+                        <option value="">August</option>
+                        <option value="">September</option>
+                        <option value="">October</option>
+                        <option value="">November</option>
+                        <option value="">December</option>
+                    </select>
+                    <input type="number" min="1990" max="2023" placeholder="year">
+
+                </span>
+
+            </span><br><br>
+            <p style="font-size: smaller;">People who use our service may have uploaded your contact information to
+                Facebook. <br> Learn
+                By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS
+                notifications from us and can opt out at any time.</p><br>
+            
+                <button class="form-control" id="loginbutton"style="background-color: green;color: white;font-size: 23px; border-radius: 5px;" onclick="logbtn()"><b>Sign Up</b></button><br><br>
+            
+                <span><a href="/index.html">Already have an account?</a> </span>
+        </div>
+    </CENTER>
+    <script>
+        var signupuser = []
+        function logbtn() {
+            var signupuser=JSON.parse(localStorage.getItem("signupuser"))|| []
+            {
+
+                var inputs = document.getElementsByTagName("input");
+
+
+                var isEmpty = 0;
+
+                for (var i = 0; i < inputs.length; i++) {
+                    if (inputs[i].value == "") {
+                        isEmpty = 1;
+                        break;
+                    }
+                }
+
+                if (isEmpty) {
+                    alert("All fields are mandatory");
+                } else {
+                    alert("I'm back");
+
+
+                    firstname = document.getElementById("txtname").value
+                    lastname = document.getElementById("txtlastname").value
+                    username=firstname+" "+lastname
+                    password = document.getElementById("txtpass").value
+                    mobile = document.getElementById("txtmobile").value
+                    dob = document.getElementById("dob").value
+
+                    // signupuser[firstname].push({ lastname })
+                    signupuser.push(
+                        {
+                        username:username,
+                        // username:lastname,
+                        usermobile:mobile,
+                        password:password,
+                        Dob:dob}
+                        )
+
+                    localStorage.setItem("signupuser", JSON.stringify(signupuser))
+
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        #fblogo {
+            height: 55vh;
+            width: 33%;
+            position: absolute;
+            bottom: 150px;
+            left: 34%;
+            border-radius: 15px;
+            box-shadow: 1px 1px 5px 5px gray;
+
+            background-color: white;
+        }
+
+        body {
+            background-color: rgb(246, 246, 252);
+        }
+
+        .form-control {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <CENTER>
+        <h1 style="font-size: 50px;color: blue;position: relative;top: 25px;"><b>facebook</b></h1>
+        <div id="fblogo" class=" form-control">
+            <span><b>Log in to Facebook</b></span><br><br>
+            <input type="text" id="txtuser" class="form-control" placeholder="Email address or phone number"><br>
+            <input type="password" id="txtpass" class="form-control" placeholder="Password"><br>
+            <button class="form-control" id="loginbutton"
+                style="background-color: blue;color: white;font-size: 23px; border-radius: 5px;" onclick="logbtn()"> <b>
+                    Log in</b></button>
+            <span><a href="/fb_find.html">Forgotten account?</a> <a href="/signup.html">Sign up for Facebook</a></span>
+        </div>
+    </CENTER>
+    <script>
+        function logbtn(){
+            // var storeddata=JSON.parse(localStorage.getItem(""))
+            mobile=document.getElementById("txtuser").value
+            password=document.getElementById("txtpass").value
+
+                if(mobile===""&&password==="")
+                alert("usser id and password can't be null")
+            else if(mobile==="")
+            alert("please enter your mobile id")
+            else if(password==="")
+            alert("password cant be null")
+            else alert("every thing is fit and fine")
+
+            var storedData = JSON.parse(localStorage.getItem("signupuser"));
+
+if (storedData) {
+    var matchFound = false;
+
+    for (var i = 0; i < storedData.length; i++) {
+        if (storedData[i].usermobile === mobile && storedData[i].password === password) {
+            matchFound = true;
+            break;
+        }
+    }
+
+    if (matchFound) {
+        alert("Login successful!");
+    } else {
+        alert("Invalid credentials. Please try again.");
+    }
+}
+ else {
+    alert("No stored signup data found. Please sign up first.");
+}
+
+} 
+
+        
+    </script>
+</body>
+
+</html>
